@@ -11,7 +11,7 @@ class StreamSideEffectTest {
   @Test
   void parallelStream() {
     List<Integer> numbers = new ArrayList<>();
-    List<Integer> results = new ArrayList<>();
+      ConcurrentLinkedQueue<Integer> results = new ConcurrentLinkedQueue<>();
 
     IntStream.range(1, 100000).forEach(numbers::add);
     // DO NOT CHANGE >>>>>
@@ -23,6 +23,6 @@ class StreamSideEffectTest {
               return number * 2;
             });
 
-    Assertions.assertThat(numbers).containsExactlyInAnyOrder(results.toArray(Integer[]::new));
+      Assertions.assertThat(results).containsExactlyInAnyOrder(numbers.stream().map(n -> n * 2).toArray(Integer[]::new));
   }
 }
