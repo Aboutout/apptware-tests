@@ -17,13 +17,19 @@ class BeanFactoryTest {
     String someString = "Hello World!!!";
     SomeEnum someEnumA = SomeEnum.SOME_ENUM_A;
     OnDemand onDemandBeanA = beanFactory.getOnDemandBean(someEnumA, someString);
-    Assertions.assertThat(onDemandBeanA.getSomeString()).isEqualTo(someString);
-    Assertions.assertThat(onDemandBeanA.getSomeEnum()).isEqualTo(someEnumA);
+
+    Assertions.assertThat(onDemandBeanA)
+            .isNotNull()
+            .extracting(OnDemand::getSomeString, OnDemand::getSomeEnum)
+            .containsExactly(someString, someEnumA);
 
     String someOtherString = "Hello Other World!!!";
     SomeEnum someEnumB = SomeEnum.SOME_ENUM_B;
     OnDemand onDemandBeanB = beanFactory.getOnDemandBean(someEnumB, someOtherString);
-    Assertions.assertThat(onDemandBeanB.getSomeString()).isEqualTo(someOtherString);
-    Assertions.assertThat(onDemandBeanB.getSomeEnum()).isEqualTo(someEnumB);
+
+    Assertions.assertThat(onDemandBeanB)
+            .isNotNull()
+            .extracting(OnDemand::getSomeString, OnDemand::getSomeEnum)
+            .containsExactly(someOtherString, someEnumB);
   }
 }
