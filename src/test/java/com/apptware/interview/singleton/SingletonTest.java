@@ -30,6 +30,6 @@ class SingletonTest {
       break;
     }
 
-    Assertions.assertThat(instance1.hashCode()).isEqualTo(instance2.hashCode());
+    Assertions.assertThat(instance1).isSameAs(instance2);
   }
 }
