@@ -34,7 +34,9 @@ class ComparisonTest {
             .sorted(Comparator.comparing(SomeClass::getLastInvoked).reversed())
             .distinct()
             .toList();
-    Assertions.assertThat(latestDistinctItems).hasSize(10);
+    Assertions.assertThat(latestDistinctItems)
+            .hasSize(20)
+            .isSortedAccordingTo(Comparator.comparing(SomeClass::getLastInvoked).reversed());
   }
 
   // Generates the same 10 unique instances everytime this method is invoked
